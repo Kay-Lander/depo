@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Item</title>
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static "exam/css/style.css" %}" media="screen" title="none" charset='utf-8'>
+</head>
+<body>
+  <a href="{% url 'success' %}">Home</a>
+  <a href="{% url 'logout' %}">logout</a>
+  <h1>{{their_user.first_name}}'s Profile</h1>
+  <p>Name:{{their_user.first_name}}{{their_user.last_name}}</p>
+  <p>Email Address:{{their_user.email}}</p>
+</body>
+</html>

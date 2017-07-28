@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen" title="none" charset="utf-8">
+</head>
+<body>
+  <h1>Hello, {{first_name.first_name}}!</h1>
+  <a href="{% url 'logout' %}">logout</a>
+  <h2>Here is the list of your friends:</h2>
+  <table>
+      {% for friend in friends%}
+    <tr>
+      <td>{{friend.first_name}}</td>
+      {% if friend.id == friend.id %}
+      <td><a href="{% url 'view-friend' id=friend.id %}">View Profile</a>
+        {% endif %}
+      </td>
+      <td><p><form action="{% url 'remove-friend' id=friend.id %}" method="post">
+          {% csrf_token %}
+            <input type="submit" value='remove Friend'>
+          </form></p>
+      </td>
+      {% endfor %}
+    </tr>
+  </table>
+
+  <h2>Other Users not on your Friend's List:</h2>
+      {% for user in users %}
+      {% if user.id == user.id %}
+      <p><a href="{% url 'view-friend' id=user.id %}">{{user.first_name}}</a></p>
+      <p><form action="{% url 'add-friend' id=user.id %}" method="post">
+          {% csrf_token %}
+            <input type="submit" value='Add as Friend'>
+          </form></p>
+          {% endif %}
+      {% endfor %}
+
+</body>
+</html>
